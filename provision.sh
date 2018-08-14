@@ -72,7 +72,7 @@ if [ ! -d /home/vagrant/work/go ]; then
 		ln -fs /usr/local/go/bin/go /usr/bin
 	fi
 	mkdir -p /home/vagrant/work/go/src
-	chown -R vagrant:vagrant /home/vagrant/work/go
+	chown -R vagrant:vagrant /home/vagrant/work
 	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/go1.10.3.linux-amd64.tar.gz
 	su -c "go get -u github.com/nsf/gocode" vagrant
 	su -c "go get -u golang.org/x/tools/cmd/guru" vagrant
