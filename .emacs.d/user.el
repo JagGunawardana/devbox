@@ -227,6 +227,7 @@
                       '(:key "C-u SPC" :description "Jump to mark")
                       '(:key "C-x C-x" :description "Exchange point and mark")
                       '(:key "C-c C- " :description "Expand region")
+                      '(:key "C-x TAB" :description "Indent region")
                       )
 
 (cheatsheet-add-group 'sexp
