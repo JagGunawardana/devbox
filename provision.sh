@@ -35,6 +35,12 @@ if [ -f /home/vagrant/host_home/.zshenv ]; then
 	chown vagrant:vagrant /home/vagrant/.zshenv
 fi
 
+###################### AWS creds from host
+if [ -f /home/vagrant/host_home/.aws ]; then
+	cp -r /home/vagrant/host_home/.aws /home/vagrant
+	chown vagrant:vagrant /home/vagrant/.aws
+fi
+
 ###################### ZSH
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
