@@ -124,6 +124,8 @@ fi
 if [ ! -z "$GIT_EMAIL" ]; then
 	git config --global user.email "${GIT_EMAIL}"
 fi
+git config --global url.ssh://git@bitbucket.org/.insteadOf https://bitbucket.org/
+git config --global url.ssh://git@github.com/.insteadOf https://github.com/
 git config --global push.default simple
 
 
