@@ -114,3 +114,10 @@ if [ ! -f /home/vagrant/bin/packer ]; then
 	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/packer_1.2.5_linux_amd64.zip
 fi
 
+if [ ! -f /home/vagrant/bin/lein ]; then
+	cd /home/vagrant/bin
+	wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+	chmod a+x /home/vagrant/bin/lein
+	chown -R vagrant:vagrant /home/vagrant/bin
+	su -c "/home/vagrant/bin/lein" vagrant
+fi
