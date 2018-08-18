@@ -134,10 +134,14 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
-sshagent
+sshagent > /dev/null
 
 # Start tmux if not already running
 if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux \
+	&& tmux new-window -n "*scratch*" \
+	&& tmux new-window -n org \
 fi
 
+figlet -f slant $(hostname)
+fortune
