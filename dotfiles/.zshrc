@@ -117,6 +117,13 @@ function binpath {
     export PATH=$(pwd)/bin:$PATH
 }
 
+function ef()
+{
+  # -c creates a new frame
+  # -a= fires a new emacs server if none is running
+  emacsclient -c -a= $*
+}
+
 # Git settings - depends on having a .zshenv on the host
 if [ ! -z "$GIT_USER_NAME" ]; then
 	git config --global user.name "${GIT_USER_NAME}"
@@ -138,9 +145,7 @@ sshagent > /dev/null
 
 # Start tmux if not already running
 if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux \
-	&& tmux new-window -n "*scratch*" \
-	&& tmux new-window -n org \
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 fi
 
 figlet -f slant $(hostname)
