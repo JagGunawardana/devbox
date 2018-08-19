@@ -214,7 +214,7 @@ map <Leader>t :TagbarToggle<CR>
 map <silent>  <Leader>a :NERDTreeToggle<CR>
 
 " GitGutter
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 
 " Buffer list
 map <silent>  <Leader>f :call BufferList()<CR>
