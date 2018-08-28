@@ -58,6 +58,10 @@ add-apt-repository ppa:ubuntu-elisp/ppa
 apt-get update
 sudo apt-get -y install emacs-snapshot emacs-snapshot-el
 chown -R vagrant:vagrant /home/vagrant/.emacs.d
+if [ ! -d /home/vagrant/.emacs.d/downloads ]; then
+	su -c "mkdir /home/vagrant/.emacs.d/downloads" vagrant
+	su -c "wget -O /home/vagrant/.emacs.d/downloads/dired+.el https://www.emacswiki.org/emacs/download/dired%2b.el" vagrant
+fi
 
 ###################### VIM
 if  [ ! -d /home/vagrant/.vim/bundle ]; then

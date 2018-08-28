@@ -1,7 +1,4 @@
 (paradox-require 'go-mode)
-(paradox-require 'auto-complete)
-(paradox-require 'go-autocomplete)
-(paradox-require 'auto-complete-config)
 (paradox-require 'helm-go-package)
 (paradox-require 'swiper-helm)
 (paradox-require 'yasnippet)
@@ -15,8 +12,6 @@
 (paradox-require 'ox-reveal)
 (paradox-require 'cheatsheet)
 (paradox-require 'paredit)
-
-(ac-config-default)
 
 (display-time-mode)
 (set-face-attribute 'default nil :height 100)
@@ -124,12 +119,23 @@
 (setq hc-highlight-tabs-mode '(not go-mode terraform-mode))
 (setq ethan-wspace-highlight-tabs-mode '(not go-mode terraform-mode))
 
-(defun autocomplete-for-go ()
-  (auto-complete-mode 1))
-(add-hook 'go-mode-hook 'autocomplete-for-go)
+;(paradox-require 'auto-complete)
+; (paradox-require 'go-autocomplete)
+;(paradox-require 'auto-complete-config)
+;(defun autocomplete-for-go ()
+;  (auto-complete-mode 1))
+;(add-hook 'go-mode-hook 'autocomplete-for-go)
+;(with-eval-after-load 'go-mode
+; (require 'go-autocomplete))
+; (global-set-key "\C-c\C-h" 'auto-complete)
+; (ac-config-default)
 
-(with-eval-after-load 'go-mode
-  (require 'go-autocomplete))
+; "company" for go auto-completion
+(paradox-require 'company)
+(paradox-require 'company-go)
+(add-hook 'go-mode-hook (lambda ()
+                          (company-mode)
+                          (set (make-local-variable 'company-backends) '(company-go))))
 
 ; Custom behaviour
 ; Mac keys
@@ -160,7 +166,6 @@
 (global-set-key "\C-xf" 'helm-projectile)
 ; used by paredit (global-set-key "\C-\M-n" 'windmove-down)
 ; used by paredit (global-set-key "\C-\M-p" 'windmove-up)
-(global-set-key "\C-c\C-h" 'auto-complete)
 (global-set-key "\C-c\C-i" 'yas-insert-snippet)
 (global-set-key "\C-c\C-m" 'bm-toggle)
 (global-set-key "\C-c\C-n"   'bm-next)
