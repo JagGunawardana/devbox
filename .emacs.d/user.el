@@ -13,6 +13,14 @@
 (paradox-require 'cheatsheet)
 (paradox-require 'paredit)
 
+(use-package 'elpy
+	:ensure t
+	:pin melpa-stable)
+
+(use-package 'cider
+	:ensure t
+	:pin melpa-stable)
+
 (display-time-mode)
 (set-face-attribute 'default nil :height 100)
 
@@ -46,7 +54,6 @@
 (setq bm-cycle-all-buffers t)
 
 ; Clojure(script)
-(paradox-require 'cider)
 (setq cider-default-repl-command "lein")
 
 ; yasnippets
@@ -85,7 +92,6 @@
 (setq sr-speedbar-right-side nil) ; put on left side
 
 ; ElPy
-(paradox-require 'elpy)
 (elpy-enable)
 
 ; Go stuff
