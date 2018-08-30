@@ -37,7 +37,7 @@ if [ -f /home/vagrant/host_home/.zshenv ]; then
 fi
 
 ###################### AWS creds from host
-if [ -f /home/vagrant/host_home/.aws ]; then
+if [ -d /home/vagrant/host_home/.aws ]; then
 	cp -r /home/vagrant/host_home/.aws /home/vagrant
 	chown vagrant:vagrant /home/vagrant/.aws
 fi
