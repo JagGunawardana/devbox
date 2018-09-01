@@ -13,13 +13,16 @@
 (paradox-require 'cheatsheet)
 (paradox-require 'paredit)
 
-(use-package 'elpy
+(use-package elpy
 	:ensure t
 	:pin melpa-stable)
 
-(use-package 'cider
+(use-package cider
 	:ensure t
 	:pin melpa-stable)
+
+(use-package drag-stuff
+	:ensure t)
 
 (display-time-mode)
 (set-face-attribute 'default nil :height 100)
