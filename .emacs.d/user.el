@@ -21,8 +21,12 @@
 	:ensure t
 	:pin melpa-stable)
 
+; drag stuff
 (use-package drag-stuff
-	:ensure t)
+    :ensure t)
+(drag-stuff-global-mode 1)
+(global-set-key "\C-c\C-d\C-p" 'drag-stuff-up)
+(global-set-key "\C-c\C-d\C-n" 'drag-stuff-down)
 
 (display-time-mode)
 (set-face-attribute 'default nil :height 100)
@@ -242,6 +246,8 @@
                       '(:key "C-x C-x" :description "Exchange point and mark")
                       '(:key "C-c C- " :description "Expand region")
                       '(:key "C-x TAB" :description "Indent region")
+                      '(:key "C-c C-d C-p" :description "Drag up")
+                      '(:key "C-c C-d C-n" :description "Drag down")
                       )
 
 (cheatsheet-add-group 'sexp
