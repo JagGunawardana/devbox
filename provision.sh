@@ -97,14 +97,14 @@ fi
 
 if [ ! -f /home/vagrant/bin/terraform ]; then
 	cd /home/vagrant/tmp
-	wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip
-	echo "6b8ce67647a59b2a3f70199c304abca0ddec0e49fd060944c26f666298e23418 terraform_0.11.7_linux_amd64.zip" > /home/vagrant/tmp/SUM
-	cat /home/vagrant/tmp/terraform_0.11.7_linux_amd64.zip | sha256sum -c /home/vagrant/tmp/SUM
+	wget https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
+	echo "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7 terraform_0.11.8_linux_amd64.zip" > /home/vagrant/tmp/SUM
+	cat /home/vagrant/tmp/terraform_0.11.8_linux_amd64.zip | sha256sum -c /home/vagrant/tmp/SUM
 	if [ $? -eq 0 ]; then
-		unzip /home/vagrant/tmp/terraform_0.11.7_linux_amd64.zip -d /home/vagrant/bin
+		unzip /home/vagrant/tmp/terraform_0.11.8_linux_amd64.zip -d /home/vagrant/bin
 	fi
 	chown -R vagrant:vagrant /home/vagrant/bin
-	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/terraform_0.11.7_linux_amd64.zip
+	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/terraform_0.11.8_linux_amd64.zip
 fi
 
 if [ ! -f /home/vagrant/bin/packer ]; then
