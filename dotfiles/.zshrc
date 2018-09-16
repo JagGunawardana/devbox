@@ -58,8 +58,16 @@ export PATH=$PATH:~/bin/proto/bin
 
 source $ZSH/oh-my-zsh.sh
 
-# Emacs to edit
+# Emacs to edit (emacsclient)
+export EDITOR=ef
 bindkey -e
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
+
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -101,8 +109,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-export EDITOR=emacs
 
 function run_cov {
     coverage run --source "$1" -m py.test && coverage report
