@@ -58,6 +58,9 @@ export PATH=$PATH:~/bin/proto/bin
 
 source $ZSH/oh-my-zsh.sh
 
+# Emacs to edit
+bindkey -e
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -99,14 +102,25 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-export EDITOR=vi
+export EDITOR=emacs
 
 function run_cov {
     coverage run --source "$1" -m py.test && coverage report
 }
+
 function clone_bitbucket {
     git clone git@bitbucket.org:${BITBUCKET_ORG}/$1.git
 }
+
+function clone_github {
+    git clone git@gihub.com:${GITHUB_ORG}/$1.git
+}
+
+function clone_gitlab {
+    git clone git@gitlab.com:${GITLAB_ORG}/$1.git
+}
+
+
 function sshagent {
     eval `ssh-agent -s`
     if [ -f ~/.ssh/id_rsa ]; then
