@@ -110,6 +110,14 @@ load_bin() {
 
 load_bin "https://releases.hashicorp.com/nomad/0.8.5/nomad_0.8.5_linux_amd64.zip" "e56c0e95e7a724b4fadd8eba32da5a3f2846f67e22e2352b19d1ada2066e063b" nomad /home/vagrant/bin
 
+# Terraform
+
+load_bin "https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip" "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7" terraform /home/vagrant/bin
+
+# Packer
+
+load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip" "bc58aa3f3db380b76776e35f69662b49f3cf15cf80420fc81a15ce971430824c" packer /home/vagrant/bin
+
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
 	cd /home/vagrant/tmp
@@ -130,30 +138,6 @@ if [ ! -d /home/vagrant/work/go ]; then
 	su -c "go get -u github.com/golang/protobuf/..." vagrant
 	su -c "go get -u github.com/rogpeppe/godef" vagrant
 	su -c "go get -u github.com/smartystreets/goconvey" vagrant
-fi
-
-if [ ! -f /home/vagrant/bin/terraform ]; then
-	cd /home/vagrant/tmp
-	wget https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
-	echo "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7 terraform_0.11.8_linux_amd64.zip" > /home/vagrant/tmp/SUM
-	cat /home/vagrant/tmp/terraform_0.11.8_linux_amd64.zip | sha256sum -c /home/vagrant/tmp/SUM
-	if [ $? -eq 0 ]; then
-		unzip /home/vagrant/tmp/terraform_0.11.8_linux_amd64.zip -d /home/vagrant/bin
-	fi
-	chown -R vagrant:vagrant /home/vagrant/bin
-	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/terraform_0.11.8_linux_amd64.zip
-fi
-
-if [ ! -f /home/vagrant/bin/packer ]; then
-	cd /home/vagrant/tmp
-	wget https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip
-	echo "bc58aa3f3db380b76776e35f69662b49f3cf15cf80420fc81a15ce971430824c  packer_1.2.5_linux_amd64.zip" > /home/vagrant/tmp/SUM
-	cat /home/vagrant/tmp/packer_1.2.5_linux_amd64.zip | sha256sum -c /home/vagrant/tmp/SUM
-	if [ $? -eq 0 ]; then
-		unzip /home/vagrant/tmp/packer_1.2.5_linux_amd64.zip -d /home/vagrant/bin
-	fi
-	chown -R vagrant:vagrant /home/vagrant/bin
-	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/packer_1.2.5_linux_amd64.zip
 fi
 
 if [ ! -f /home/vagrant/bin/lein ]; then
