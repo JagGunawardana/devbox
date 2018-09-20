@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean && sudo apt-get autoremove
 sudo apt-get -y install tmux zip zsh
@@ -65,6 +65,7 @@ if [ ! -d /home/vagrant/.emacs.d/downloads ]; then
 fi
 
 ###################### VIM
+
 if  [ ! -d /home/vagrant/.vim/bundle ]; then
 	mkdir -p /home/vagrant/.vim/bundle
 	git clone https://github.com/VundleVim/Vundle.vim.git /home/vagrant/.vim/bundle/vundle
@@ -72,6 +73,42 @@ if  [ ! -d /home/vagrant/.vim/bundle ]; then
 	su -c "echo | echo | vim +PluginInstall +GoInstallBinaries +qall > /dev/null" vagrant
 fi
 
+## Helper to download binaries and check the hash
+load_bin() {
+    if [ $# != 4 ]; then
+        echo "Parameter error parameters ($# params), usage $0 URL sha256sum service_name dest"
+        exit 1
+    fi
+    local url=$1
+    local checksum=$2
+    local service=$3
+    local dest=$4
+    if [ -f ${dest}/$service ]; then
+        echo "Service $service present in $dest - exiting"
+        exit 0
+    fi
+    echo "Downloading $url, checksum should be $checksum"
+    rm -f $filename SUM
+    wget $url
+    filename=$(basename $url)
+    echo "$checksum  $filename" > ./SUM
+    cat $filename | sha256sum -c ./SUM
+    if [ $? -ne 0 ]; then
+        echo "Failed to verify checksum for $service"
+        exit 1
+    fi
+    echo "Checksum for $service OK"
+    if [[ ${filename:e} -eq "zip" ]]; then
+        unzip -o $filename  -d $dest
+        chown vagrant:vagrant $dest/*
+        chmod +x $dest/*
+    fi
+    rm -f SUM $filename
+}
+
+# Nomad
+
+load_bin "https://releases.hashicorp.com/nomad/0.8.5/nomad_0.8.5_linux_amd64.zip" "e56c0e95e7a724b4fadd8eba32da5a3f2846f67e22e2352b19d1ada2066e063b" nomad /home/vagrant/bin
 
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
