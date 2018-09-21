@@ -51,9 +51,11 @@ chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/ohai-emacs /home/vagrant/.emacs.d
 cp -r /home/vagrant/.emacs/* /home/vagrant/.emacs.d
 rm -rf .emacs
-if  [ ! -d /home/vagrant/tmp/snippets ]; then
+if  [ ! -f /home/vagrant/.emacs.d/snippets/flagfile ]; then
+	rm -rf /home/vagrant/tmp/snippets
 	git clone https://github.com/JagGunawardana/yasnippet-snippets.git /home/vagrant/tmp/snippets
 	cp -r /home/vagrant/tmp/snippets/snippets /home/vagrant/.emacs.d
+	rm -rf /home/vagrant/tmp/snippets
 fi
 add-apt-repository ppa:ubuntu-elisp/ppa
 apt-get update
@@ -131,7 +133,7 @@ if [ ! -d /home/vagrant/work/go ]; then
 	mkdir -p /home/vagrant/work/go/src
 	chown -R vagrant:vagrant /home/vagrant/work
 	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/go1.10.3.linux-amd64.tar.gz
-	su -c "go get -u github.com/nsf/gocode" vagrant
+	su -c "go get -u github.com/mdempsky/gocode" vagrant
 	su -c "go get -u golang.org/x/tools/cmd/guru" vagrant
 	su -c "go get -u golang.org/x/tools/cmd/goimports" vagrant
 	su -c "go get -u google.golang.org/grpc" vagrant
