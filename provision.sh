@@ -123,16 +123,16 @@ load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.z
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
 	cd /home/vagrant/tmp
-	wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
-	echo "fa1b0e45d3b647c252f51f5e1204aba049cde4af177ef9f2181f43004f901035  go1.10.3.linux-amd64.tar.gz" > /home/vagrant/tmp/SUM
-	cat /home/vagrant/tmp/go1.10.3.linux-amd64.tar.gz | sha256sum -c /home/vagrant/tmp/SUM
+	wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
+	echo "b3fcf280ff86558e0559e185b601c9eade0fd24c900b4c63cd14d1d38613e499  go1.11.linux-amd64.tar.gz" > /home/vagrant/tmp/SUM
+	cat /home/vagrant/tmp/go1.11.linux-amd64.tar.gz | sha256sum -c /home/vagrant/tmp/SUM
 	if [ $? -eq 0 ]; then
-		tar -C /usr/local -xzf /home/vagrant/tmp/go1.10.3.linux-amd64.tar.gz
+		tar -C /usr/local -xzf /home/vagrant/tmp/go1.11.linux-amd64.tar.gz
 		ln -fs /usr/local/go/bin/go /usr/bin
 	fi
 	mkdir -p /home/vagrant/work/go/src
 	chown -R vagrant:vagrant /home/vagrant/work
-	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/go1.10.3.linux-amd64.tar.gz
+	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/go1.11.linux-amd64.tar.gz
 	su -c "go get -u github.com/mdempsky/gocode" vagrant
 	su -c "go get -u golang.org/x/tools/cmd/guru" vagrant
 	su -c "go get -u golang.org/x/tools/cmd/goimports" vagrant
