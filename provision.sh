@@ -31,6 +31,8 @@ mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
 chsh -s /bin/zsh vagrant
 usermod -a -G docker,sudo,root vagrant
 
+su -c "git config --global url.\"git@github.com:\".insteadOf \"https://github.com/\"" vagrant
+
 ###################### Env from host
 if [ -f /home/vagrant/host_home/.zshenv ]; then
 	cp /home/vagrant/host_home/.zshenv /home/vagrant
