@@ -11,11 +11,11 @@ Simple vagrant devbox, that gives a decent zsh, emacs, golang, python tmux etc..
 ## Create
 
 1. Install Hashicorp Vagrant (https://vagrantup.com)
- a. Install vagrant plugin install vagrant-vbguest
- b. Run ```vagrant vbguest```
-2. In root, run ```vagrant up```
-3. Check for errors
-4. Run ```vagrant ssh``` to login
+2. Install vagrant plugin install vagrant-vbguest
+3. Run ```vagrant vbguest```
+4. In root, run ```vagrant up```
+5. Check for errors
+6. Run ```vagrant ssh``` to login
 
 ## Notes
 
