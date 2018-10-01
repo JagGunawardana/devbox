@@ -20,6 +20,9 @@
 (use-package cider
 	:ensure t
 	:pin melpa-stable)
+(use-package hcl-mode
+    :ensure t
+    :pin melpa-stable)
 
 ; drag stuff
 (use-package drag-stuff
@@ -68,7 +71,6 @@
 (yas-global-mode 1)
 
 ; Terraform
-(paradox-require 'hcl-mode)
 (paradox-require 'terraform-mode)
 (custom-set-variables
    '(terraform-indent-level 4))

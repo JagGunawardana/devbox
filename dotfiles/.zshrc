@@ -50,6 +50,8 @@ plugins=(git docker mysql postgres vi-mode python jsontools paver pep8 vagrant w
 # User configuration
 
 export GOPATH=~/work/go
+export GO111MODULE=on
+
 export PATH=~/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:~/bin:/usr/local/packer
 export PATH=$PATH:/usr/local/go/bin:~/work/go/bin:$GOPATH/bin
 export PATH=$PATH:~/bin/proto/bin
