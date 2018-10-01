@@ -119,7 +119,7 @@ function clone_bitbucket {
 }
 
 function clone_github {
-    git clone git@gihub.com:${GITHUB_ORG}/$1.git
+    git clone git@github.com:${GITHUB_ORG}/$1.git
 }
 
 function clone_gitlab {
