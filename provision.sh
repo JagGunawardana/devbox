@@ -135,13 +135,13 @@ if [ ! -d /home/vagrant/work/go ]; then
 	mkdir -p /home/vagrant/work/go/src
 	chown -R vagrant:vagrant /home/vagrant/work
 	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/go1.11.linux-amd64.tar.gz
-	su -c "go get -u github.com/mdempsky/gocode" vagrant
-	su -c "go get -u golang.org/x/tools/cmd/guru" vagrant
-	su -c "go get -u golang.org/x/tools/cmd/goimports" vagrant
-	su -c "go get -u google.golang.org/grpc" vagrant
-	su -c "go get -u github.com/golang/protobuf/..." vagrant
-	su -c "go get -u github.com/rogpeppe/godef" vagrant
-	su -c "go get -u github.com/smartystreets/goconvey" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/mdempsky/gocode" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u golang.org/x/tools/cmd/guru" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u golang.org/x/tools/cmd/goimports" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u google.golang.org/grpc" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/golang/protobuf/..." vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/rogpeppe/godef" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/smartystreets/goconvey" vagrant
 fi
 
 if [ ! -f /home/vagrant/bin/lein ]; then
