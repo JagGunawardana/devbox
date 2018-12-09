@@ -10,6 +10,7 @@ sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev python-pip
 sudo apt-get -y install fortunes figlet
+sudo apt-get -y install redis-server mongodb
 su -c "pip install awscli --upgrade --user" vagrant
 [ -L /home/vagrant/bin/aws ] || ln -s /home/vagrant/.local/bin/aws /home/vagrant/bin/aws
 sudo locale-gen en_GB.UTF-8
@@ -143,6 +144,7 @@ if [ ! -d /home/vagrant/work/go ]; then
 	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/golang/protobuf/..." vagrant
 	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/rogpeppe/godef" vagrant
 	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/smartystreets/goconvey" vagrant
+	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/mna/pigeon" vagrant
 fi
 
 if [ ! -f /home/vagrant/bin/lein ]; then
