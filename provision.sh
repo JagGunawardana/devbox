@@ -3,7 +3,7 @@
 sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean && sudo apt-get autoremove
 sudo apt-get -y install tmux zip zsh
 
-sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim
+sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim rlwrap
 sudo apt-get -y install nodejs ruby ruby-dev apt-transport-https build-essential ca-certificates default-jdk fonts-cmu fonts-dejavu
 sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-10 libpq-dev
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev
@@ -91,7 +91,7 @@ load_bin() {
     local dest=$4
     if [ -f ${dest}/$service ]; then
         echo "Service $service present in $dest - exiting"
-        exit 0
+        return 0
     fi
     echo "Downloading $url, checksum should be $checksum"
     rm -f $filename SUM
@@ -153,4 +153,12 @@ if [ ! -f /home/vagrant/bin/lein ]; then
 	chmod a+x /home/vagrant/bin/lein
 	chown -R vagrant:vagrant /home/vagrant/bin
 	su -c "/home/vagrant/bin/lein" vagrant
+fi
+
+if [ ! -f /home/vagrant/bin/linux-install-1.9.0.397.sh ]; then
+        cd /home/vagrant/bin
+	wget https://download.clojure.org/install/linux-install-1.9.0.397.sh
+	chmod a+x /home/vagrant/bin/linux-install-1.9.0.397.sh
+	chown -R vagrant:vagrant /home/vagrant/bin
+	sudo ./linux-install-1.9.0.397.sh
 fi
