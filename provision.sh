@@ -11,6 +11,8 @@ sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev python-pip
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
+sudo snap install --classic heroku
+
 su -c "pip install awscli --upgrade --user" vagrant
 [ -L /home/vagrant/bin/aws ] || ln -s /home/vagrant/.local/bin/aws /home/vagrant/bin/aws
 sudo locale-gen en_GB.UTF-8
