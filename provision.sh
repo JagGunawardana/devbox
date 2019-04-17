@@ -52,6 +52,7 @@ fi
 ###################### ZSH
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
+su -c "mkdir ~/.z" vagrant
 
 ###################### EMacs
 test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/ohai-emacs /home/vagrant/.emacs.d
