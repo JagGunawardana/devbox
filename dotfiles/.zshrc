@@ -153,6 +153,11 @@ fi
 if [ ! -z "$GIT_EMAIL" ]; then
 	git config --global user.email "${GIT_EMAIL}"
 fi
+# If you want to use a different email for biz git then run the alias by "git biz" - per repo
+if [ ! -z "$GIT_BIZ_EMAIL" ]; then
+	git config --global alias.biz 'config user.email "${GIT_BIZ_EMAIL}"'
+fi
+
 git config --global url.ssh://git@bitbucket.org/.insteadOf https://bitbucket.org/
 git config --global url.ssh://git@github.com/.insteadOf https://github.com/
 git config --global push.default simple
