@@ -30,6 +30,7 @@ chown -R vagrant:vagrant /home/vagrant/.aws
 find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*"
 mkdir -p /home/vagrant/tmp && chown -R vagrant:vagrant /home/vagrant/tmp
 mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
+mkdir -p /home/vagrant/.z && chown -R vagrant:vagrant /home/vagrant/.z
 
 ###################### Vagrant user
 chsh -s /bin/zsh vagrant
@@ -52,7 +53,6 @@ fi
 ###################### ZSH
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
-su -c "mkdir ~/.z" vagrant
 
 ###################### EMacs
 test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/ohai-emacs /home/vagrant/.emacs.d
