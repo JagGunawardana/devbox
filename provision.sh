@@ -37,6 +37,7 @@ chsh -s /bin/zsh vagrant
 usermod -a -G docker,sudo,root vagrant
 
 su -c "git config --global url.\"git@github.com:\".insteadOf \"https://github.com/\"" vagrant
+su -c "git config --global url.\"git@gitlab.com:\".insteadOf \"https://gitlab.com/\"" vagrant
 
 ###################### Env from host
 if [ -f /home/vagrant/host_home/.zshenv ]; then
