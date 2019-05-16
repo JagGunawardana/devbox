@@ -28,6 +28,7 @@ chmod 700 /home/vagrant/.ssh
 chown -R vagrant:vagrant /home/vagrant/.ssh
 chown -R vagrant:vagrant /home/vagrant/.aws
 find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*"
+find . -maxdepth 2 -type d -exec chown -R vagrant:vagrant {} \; -name ".*"
 mkdir -p /home/vagrant/tmp && chown -R vagrant:vagrant /home/vagrant/tmp
 mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
 mkdir -p /home/vagrant/.z && chown -R vagrant:vagrant /home/vagrant/.z
