@@ -9,6 +9,7 @@ sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev python-pip
+suto apt-get -y install phantomjs
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo snap install --classic heroku
@@ -151,6 +152,8 @@ if [ ! -d /home/vagrant/work/go ]; then
 	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/smartystreets/goconvey" vagrant
 	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/mna/pigeon" vagrant
 fi
+
+###################### Clojure
 
 if [ ! -f /home/vagrant/bin/lein ]; then
 	cd /home/vagrant/bin
