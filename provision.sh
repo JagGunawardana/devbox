@@ -9,7 +9,7 @@ sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev python-pip
-suto apt-get -y install phantomjs
+sudo apt-get -y install phantomjs
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo snap install --classic heroku
@@ -163,10 +163,10 @@ if [ ! -f /home/vagrant/bin/lein ]; then
 	su -c "/home/vagrant/bin/lein" vagrant
 fi
 
-if [ ! -f /home/vagrant/bin/linux-install-1.9.0.397.sh ]; then
+if [ ! -f /home/vagrant/bin/linux-install-1.10.0.442.sh ]; then
         cd /home/vagrant/bin
-	wget https://download.clojure.org/install/linux-install-1.9.0.397.sh
-	chmod a+x /home/vagrant/bin/linux-install-1.9.0.397.sh
+	wget https://download.clojure.org/install/linux-install-1.10.0.442.sh
+	chmod a+x /home/vagrant/bin/linux-install-1.10.0.442.sh
 	chown -R vagrant:vagrant /home/vagrant/bin
-	sudo ./linux-install-1.9.0.397.sh
+	sudo /home/vagrant/bin/linux-install-1.10.0.442.sh
 fi
