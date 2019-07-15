@@ -163,10 +163,10 @@ if [ ! -f /home/vagrant/bin/lein ]; then
 	su -c "/home/vagrant/bin/lein" vagrant
 fi
 
-if [ ! -f /home/vagrant/bin/linux-install-1.10.0.442.sh ]; then
+if [ ! -f /home/vagrant/bin/linux-install-1.10.1.462.sh ]; then
         cd /home/vagrant/bin
-	wget https://download.clojure.org/install/linux-install-1.10.0.442.sh
-	chmod a+x /home/vagrant/bin/linux-install-1.10.0.442.sh
+	wget https://download.clojure.org/install/linux-install-1.10.1.462.sh
+	chmod a+x /home/vagrant/bin/linux-install-1.10.1.462.sh
 	chown -R vagrant:vagrant /home/vagrant/bin
-	sudo /home/vagrant/bin/linux-install-1.10.0.442.sh
+	sudo /home/vagrant/bin/linux-install-1.10.1.462.sh
 fi
