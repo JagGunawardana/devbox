@@ -12,6 +12,7 @@ sudo apt-get -y install python-dev python-pip
 sudo apt-get -y install phantomjs
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
+sudo apt-get -y install fonts-powerline
 sudo snap install --classic heroku
 
 su -c "pip install awscli --upgrade --user" vagrant
