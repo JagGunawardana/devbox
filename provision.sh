@@ -15,8 +15,10 @@ sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
 sudo snap install --classic heroku
 
-su -c "pip install awscli --upgrade --user" vagrant
-[ -L /home/vagrant/bin/aws ] || ln -s /home/vagrant/.local/bin/aws /home/vagrant/bin/aws
+if [ ! -f /home/vagrant/bin/aws ]; then
+	su -c "pip install awscli --upgrade --user" vagrant
+	[ -L /home/vagrant/bin/aws ] || ln -s /home/vagrant/.local/bin/aws /home/vagrant/bin/aws
+fi
 sudo locale-gen en_GB.UTF-8
 
 ###################### Sort out file permissions
@@ -33,7 +35,7 @@ find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*"
 find . -maxdepth 2 -type d -exec chown -R vagrant:vagrant {} \; -name ".*"
 mkdir -p /home/vagrant/tmp && chown -R vagrant:vagrant /home/vagrant/tmp
 mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
-mkdir -p /home/vagrant/.z && chown -R vagrant:vagrant /home/vagrant/.z
+touch /home/vagrant/.z && chown vagrant:vagrant /home/vagrant/.z
 
 ###################### Vagrant user
 chsh -s /bin/zsh vagrant
@@ -67,11 +69,11 @@ if  [ ! -f /home/vagrant/.emacs.d/snippets/flagfile ]; then
 	git clone https://github.com/JagGunawardana/yasnippet-snippets.git /home/vagrant/tmp/snippets
 	cp -r /home/vagrant/tmp/snippets/snippets /home/vagrant/.emacs.d
 	rm -rf /home/vagrant/tmp/snippets
+	add-apt-repository ppa:ubuntu-elisp/ppa
+	apt-get update
+	sudo apt-get -y install emacs-snapshot emacs-snapshot-el
+	chown -R vagrant:vagrant /home/vagrant/.emacs.d
 fi
-add-apt-repository ppa:ubuntu-elisp/ppa
-apt-get update
-sudo apt-get -y install emacs-snapshot emacs-snapshot-el
-chown -R vagrant:vagrant /home/vagrant/.emacs.d
 if [ ! -d /home/vagrant/.emacs.d/downloads ]; then
 	su -c "mkdir /home/vagrant/.emacs.d/downloads" vagrant
 	su -c "wget -O /home/vagrant/.emacs.d/downloads/dired+.el https://www.emacswiki.org/emacs/download/dired%2b.el" vagrant
@@ -96,14 +98,14 @@ load_bin() {
     local checksum=$2
     local service=$3
     local dest=$4
-    if [ -f ${dest}/$service ]; then
+    if [ -e ${dest}/$service ]; then
         echo "Service $service present in $dest - exiting"
         return 0
     fi
     echo "Downloading $url, checksum should be $checksum"
-    rm -f $filename SUM
-    wget $url
     filename=$(basename $url)
+    rm -f $filename SUM
+    wget -nv $url
     echo "$checksum  $filename" > ./SUM
     cat $filename | sha256sum -c ./SUM
     if [ $? -ne 0 ]; then
@@ -111,10 +113,17 @@ load_bin() {
         exit 1
     fi
     echo "Checksum for $service OK"
-    if [[ ${filename:e} -eq "zip" ]]; then
+    if [[ ${filename: -4}  == ".zip" ]]; then
+	echo "Expanding $filename - ZIP"
         unzip -o $filename  -d $dest
-        chown vagrant:vagrant $dest/*
+        chown -R vagrant:vagrant $dest/*
         chmod +x $dest/*
+    fi
+    if [[ ${filename: -7} == ".tar.gz" ]]; then
+	echo "Expanding $filename - GZIP"
+        mv $filename  $dest
+        cd $dest && tar zxvf $filename  $service
+        chown -R vagrant:vagrant $dest/*
     fi
     rm -f SUM $filename
 }
@@ -130,6 +139,13 @@ load_bin "https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux
 # Packer
 
 load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip" "bc58aa3f3db380b76776e35f69662b49f3cf15cf80420fc81a15ce971430824c" packer /home/vagrant/bin
+
+# Google cloud SDK
+
+load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin
+which gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant
+su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
+su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant
 
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
@@ -158,7 +174,7 @@ fi
 
 if [ ! -f /home/vagrant/bin/lein ]; then
 	cd /home/vagrant/bin
-	wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+	wget -qhttps://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 	chmod a+x /home/vagrant/bin/lein
 	chown -R vagrant:vagrant /home/vagrant/bin
 	su -c "/home/vagrant/bin/lein" vagrant
@@ -166,7 +182,7 @@ fi
 
 if [ ! -f /home/vagrant/bin/linux-install-1.10.1.462.sh ]; then
         cd /home/vagrant/bin
-	wget https://download.clojure.org/install/linux-install-1.10.1.462.sh
+	wget -q https://download.clojure.org/install/linux-install-1.10.1.462.sh
 	chmod a+x /home/vagrant/bin/linux-install-1.10.1.462.sh
 	chown -R vagrant:vagrant /home/vagrant/bin
 	sudo /home/vagrant/bin/linux-install-1.10.1.462.sh
