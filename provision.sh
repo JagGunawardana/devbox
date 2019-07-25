@@ -134,7 +134,7 @@ load_bin "https://releases.hashicorp.com/nomad/0.8.5/nomad_0.8.5_linux_amd64.zip
 
 # Terraform
 
-load_bin "https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip" "84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20c9b7" terraform /home/vagrant/bin
+load_bin "https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip" "babb4a30b399fb6fc87a6aa7435371721310c2e2102a95a763ef2c979ab06ce2" terraform /home/vagrant/bin
 
 # Packer
 
@@ -143,9 +143,8 @@ load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.z
 # Google cloud SDK
 
 load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin
-which gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant
-su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
-su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant
+which gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
+which kubectl || su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/kubectl /home/vagrant/bin/kubectl" vagrant
 
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
