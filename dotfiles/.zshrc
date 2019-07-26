@@ -47,6 +47,9 @@ ZSH_THEME="muse"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git docker postgres vi-mode python jsontools paver pep8 vagrant wd z terraform nomad golang lein emoji-clock chucknorris copyfile)
 
+# Gcloud
+source ~/bin/google-cloud-sdk/completion.zsh.inc
+
 # User configuration
 
 export GOPATH=~/work/go
