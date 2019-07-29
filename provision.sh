@@ -143,8 +143,9 @@ load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.z
 # Google cloud SDK
 
 load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin
-which gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
-which kubectl || su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/kubectl /home/vagrant/bin/kubectl" vagrant
+test -L /home/vagrant/bin/gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
+test -L /home/vagrant/bin/kubectl || su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/kubectl /home/vagrant/bin/kubectl" vagrant
+test -L /home/vagrant/bin/gsutil || su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gsutil /home/vagrant/bin/gsutil" vagrant
 
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
