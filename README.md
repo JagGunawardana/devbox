@@ -11,7 +11,7 @@ Simple vagrant devbox, that gives a decent zsh, emacs, golang, python tmux etc..
 ## Create
 
 1. Install Hashicorp Vagrant (https://vagrantup.com)
-2. Install vagrant plugin install vagrant-vbguest
+2. Install plugin: vagrant plugin install vagrant-vbguest, and vagrant plugin install vagrant-disksize
 3. Run ```vagrant vbguest```
 4. In root, run ```vagrant up```
 5. Check for errors
