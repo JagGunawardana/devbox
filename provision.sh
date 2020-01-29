@@ -175,7 +175,7 @@ fi
 
 if [ ! -f /home/vagrant/bin/lein ]; then
 	cd /home/vagrant/bin
-	wget -qhttps://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+	wget -q https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
 	chmod a+x /home/vagrant/bin/lein
 	chown -R vagrant:vagrant /home/vagrant/bin
 	su -c "/home/vagrant/bin/lein" vagrant
