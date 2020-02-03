@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean
 sudo apt-get -y install tmux zip zsh
 
 sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim rlwrap
-sudo apt-get -y install nodejs ruby ruby-dev apt-transport-https build-essential ca-certificates default-jdk fonts-cmu fonts-dejavu
+sudo apt-get -y install ruby ruby-dev apt-transport-https build-essential ca-certificates default-jdk fonts-cmu fonts-dejavu
 sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-10 libpq-dev
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev ntp
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
@@ -61,6 +61,13 @@ fi
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 
+
+###################### Node
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get -y install nodejs
+npm install -g shadow-cljs
+
+###################### ZSH
 ###################### EMacs
 test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/ohai-emacs /home/vagrant/.emacs.d
 cp -r /home/vagrant/.emacs/* /home/vagrant/.emacs.d
