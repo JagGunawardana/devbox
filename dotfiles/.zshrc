@@ -168,13 +168,14 @@ git config --global url.ssh://git@bitbucket.org/.insteadOf https://bitbucket.org
 git config --global url.ssh://git@github.com/.insteadOf https://github.com/
 git config --global push.default simple
 
-
-
 bindkey '^R' history-incremental-search-backward
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
 sshagent > /dev/null
+
+source ~/bin/google-cloud-sdk/completion.zsh.inc
+source ~/bin/google-cloud-sdk/path.zsh.inc
 
 # Start tmux if not already running
 if command -v tmux>/dev/null; then

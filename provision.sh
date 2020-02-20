@@ -142,7 +142,7 @@ load_bin "https://releases.hashicorp.com/nomad/0.8.5/nomad_0.8.5_linux_amd64.zip
 
 # Terraform
 
-load_bin "https://releases.hashicorp.com/terraform/0.12.5/terraform_0.12.5_linux_amd64.zip" "babb4a30b399fb6fc87a6aa7435371721310c2e2102a95a763ef2c979ab06ce2" terraform /home/vagrant/bin
+load_bin "https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip" "ca0d0796c79d14ee73a3d45649dab5e531f0768ee98da71b31e423e3278e9aa9" terraform /home/vagrant/bin
 
 # Packer
 
