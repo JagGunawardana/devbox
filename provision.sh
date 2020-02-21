@@ -66,6 +66,7 @@ chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get -y install nodejs
 npm install -g shadow-cljs
+sudo sudo npm install -g karma-cli
 
 ###################### ZSH
 ###################### EMacs
