@@ -15,6 +15,11 @@ sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
 sudo snap install --classic heroku
 
+# Chrome headless
+sudo apt-get install -y libappindicator1 fonts-liberation
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome*.deb
+
 if [ ! -f /home/vagrant/bin/aws ]; then
 	su -c "pip install awscli --upgrade --user" vagrant
 	[ -L /home/vagrant/bin/aws ] || ln -s /home/vagrant/.local/bin/aws /home/vagrant/bin/aws
