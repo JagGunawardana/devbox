@@ -154,6 +154,11 @@ load_bin "https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_lin
 
 load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip" "bc58aa3f3db380b76776e35f69662b49f3cf15cf80420fc81a15ce971430824c" packer /home/vagrant/bin
 
+# docker-compose
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
 # Google cloud SDK
 
 load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin

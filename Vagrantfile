@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "docker",
     	images: ["consul"]
 
-  config.vm.provision "shell",
+    config.vm.provision "shell",
         privileged: true,
     inline: "apt-get -y install zsh"
 
