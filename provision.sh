@@ -9,7 +9,7 @@ sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev ntp jq
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev python-pip
-sudo apt-get -y install phantomjs
+sudo apt-get -y install phantomjs httpie
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
