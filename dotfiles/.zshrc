@@ -179,7 +179,7 @@ source ~/bin/google-cloud-sdk/path.zsh.inc
 
 # Start tmux if not already running
 if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux attach
 fi
 
 figlet -f slant $(hostname)
