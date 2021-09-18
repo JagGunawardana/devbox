@@ -20,6 +20,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	destination: "$HOME/.hostssh"
 
     config.vm.provision "file",
+        source: "~/.aws",
+	destination: "$HOME/.aws"
+
+    config.vm.provision "file",
     	source: "~/.gcp", 
 	destination: "$HOME/.gcp"
 
