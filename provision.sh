@@ -46,34 +46,36 @@ mkdir -p /home/vagrant/tmp && chown -R vagrant:vagrant /home/vagrant/tmp
 mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
 touch /home/vagrant/.z && chown vagrant:vagrant /home/vagrant/.z
 
-echo "Setting file ownership ....."
-#find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*" -not -path "./host_home/*"
-
 ###################### Vagrant user
+echo "Varant user shell ...."
 chsh -s /bin/zsh vagrant
 usermod -a -G docker,sudo,root vagrant
 
+echo "Vagrant git ....."
 su -c "git config --global url.\"git@github.com:\".insteadOf \"https://github.com/\"" vagrant
 su -c "git config --global url.\"git@gitlab.com:\".insteadOf \"https://gitlab.com/\"" vagrant
 
 ###################### Env from host
+echo "Host env ..."
 if [ -f /home/vagrant/host_home/.zshenv ]; then
 	cp /home/vagrant/host_home/.zshenv /home/vagrant
 	chown vagrant:vagrant /home/vagrant/.zshenv
 fi
 
 ###################### AWS creds from host
+echo "AWS creds ..."
 if [ -d /home/vagrant/host_home/.aws ]; then
 	cp -r /home/vagrant/host_home/.aws /home/vagrant
 	chown vagrant:vagrant /home/vagrant/.aws
 fi
 
 ###################### ZSH
+echo "ZSH ..."
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 
-
 ###################### Node
+echo "Node ....."
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get -y install nodejs
 npm install -g shadow-cljs
@@ -81,6 +83,7 @@ sudo sudo npm install -g karma-cli
 
 ###################### ZSH
 ###################### EMacs
+echo "EMACS ..."
 test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/ohai-emacs /home/vagrant/.emacs.d
 cp -r /home/vagrant/.emacs/* /home/vagrant/.emacs.d
 rm -rf .emacs
@@ -100,7 +103,7 @@ if [ ! -d /home/vagrant/.emacs.d/downloads ]; then
 fi
 
 ###################### VIM
-
+echo "VIM ...."
 if  [ ! -d /home/vagrant/.vim/bundle ]; then
 	mkdir -p /home/vagrant/.vim/bundle
 	git clone https://github.com/VundleVim/Vundle.vim.git /home/vagrant/.vim/bundle/vundle
