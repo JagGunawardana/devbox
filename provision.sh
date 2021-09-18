@@ -32,16 +32,23 @@ for i in /home/vagrant/.hostssh/*; do
 	test -f /home/vagrant/.ssh/$(basename $i) || cat $i >> /home/vagrant/.ssh/$(basename $i)
 done
 
+echo "Setting SSH permissions....."
 chmod 600 /home/vagrant/.ssh/*
 chmod 700 /home/vagrant/.ssh
 chown -R vagrant:vagrant /home/vagrant/.ssh
+
+echo "Setting cloud dir owners....."
 chown -R vagrant:vagrant /home/vagrant/.aws
 chown -R vagrant:vagrant /home/vagrant/.gcp
-find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*"
-find . -maxdepth 2 -type d -exec chown -R vagrant:vagrant {} \; -name ".*"
+
+echo "Setting dirs ....."
 mkdir -p /home/vagrant/tmp && chown -R vagrant:vagrant /home/vagrant/tmp
 mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
 touch /home/vagrant/.z && chown vagrant:vagrant /home/vagrant/.z
+
+echo "Setting dir ownership ....."
+find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*"
+find . -maxdepth 2 -type d -exec chown -R vagrant:vagrant {} \; -name ".*"
 
 ###################### Vagrant user
 chsh -s /bin/zsh vagrant
