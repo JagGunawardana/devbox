@@ -52,7 +52,7 @@ mkdir -p /home/vagrant/bin && chown -R vagrant:vagrant /home/vagrant/bin
 touch /home/vagrant/.z && chown vagrant:vagrant /home/vagrant/.z
 
 echo "Setting file ownership ....."
-find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*"
+find . -maxdepth 1 -type f  -exec chown vagrant:vagrant {} \; -name ".*" -not -path "./host_home/*"
 
 ###################### Vagrant user
 chsh -s /bin/zsh vagrant
