@@ -63,6 +63,8 @@ su -c "git config --global url.\"git@gitlab.com:\".insteadOf \"https://gitlab.co
 ###################### Env from host
 echo "Host env ..."
 if [ -f /home/vagrant/host_home/.zshenv ]; then
+	echo "Copying host env ....."
+	ls -al /home/varant/host_home
 	cp /home/vagrant/host_home/.zshenv /home/vagrant
 	chown vagrant:vagrant /home/vagrant/.zshenv
 fi
