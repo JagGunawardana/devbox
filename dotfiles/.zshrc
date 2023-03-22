@@ -107,8 +107,8 @@ alias todo=~/bin/todo.txt_cli-2.10/todo.sh
 alias ssh_unsafe='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no '
 
 # Virtualenv wrapper
-# export WORKON_HOME=~/.virtualenvs
-# . /usr/local/bin/virtualenvwrapper.sh
+export WORKON_HOME=~/.virtualenvs
+export PATH=$PATH:~/.local/bin
 
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"

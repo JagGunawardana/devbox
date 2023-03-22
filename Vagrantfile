@@ -4,10 +4,10 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = "ubuntu/bionic64"
+    config.vm.box = "ubuntu/jammy64"
     config.disksize.size = "50GB"
     config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "2"]
+        vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "1"]
     end
     config.vbguest.auto_update = true
     config.vm.hostname = 'plato'

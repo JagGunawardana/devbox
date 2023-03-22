@@ -8,21 +8,18 @@ sudo apt-get -y install ruby ruby-dev apt-transport-https build-essential ca-cer
 sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-10 libpq-dev postgis
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev ntp jq
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
-sudo apt-get -y install python-dev python-pip
+sudo apt-get -y install python-dev-is-python3 python3-pip
 sudo apt-get -y install phantomjs httpie
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
+sudo apt-get -y install awscli
 sudo snap install --classic heroku
 
 # Chrome headless
 sudo apt-get install -y libappindicator1 fonts-liberation
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo dpkg -i google-chrome*.deb
-
-if [ ! -f /home/vagrant/bin/aws ]; then su -c "pip install awscli --upgrade --user" vagrant
-	[ -L /home/vagrant/bin/aws ] || ln -s /home/vagrant/.local/bin/aws /home/vagrant/bin/aws
-fi
 
 sudo locale-gen en_GB.UTF-8
 
@@ -82,9 +79,14 @@ echo "ZSH ..."
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 
+###################### Python
+
+pip install virtualenv
+pip install virtualenvwrapper
+
 ###################### Node
 echo "Node ....."
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get -y install nodejs
 npm install -g shadow-cljs
 sudo sudo npm install -g karma-cli
@@ -177,10 +179,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 # Google cloud SDK
 
-load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin
-test -L /home/vagrant/bin/gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
-test -L /home/vagrant/bin/kubectl || su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/kubectl /home/vagrant/bin/kubectl" vagrant
-test -L /home/vagrant/bin/gsutil || su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gsutil /home/vagrant/bin/gsutil" vagrant
+#load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin
+#test -L /home/vagrant/bin/gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
+#test -L /home/vagrant/bin/kubectl || su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/kubectl /home/vagrant/bin/kubectl" vagrant
+#test -L /home/vagrant/bin/gsutil || su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gsutil /home/vagrant/bin/gsutil" vagrant
 
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
@@ -215,10 +217,10 @@ if [ ! -f /home/vagrant/bin/lein ]; then
 	su -c "/home/vagrant/bin/lein" vagrant
 fi
 
-if [ ! -f /home/vagrant/bin/linux-install-1.10.1.462.sh ]; then
+if [ ! -f /home/vagrant/bin/linux-install-1.11.1.1224.sh ]; then
         cd /home/vagrant/bin
-	wget -q https://download.clojure.org/install/linux-install-1.10.1.462.sh
-	chmod a+x /home/vagrant/bin/linux-install-1.10.1.462.sh
-	chown -R vagrant:vagrant /home/vagrant/bin
-	sudo /home/vagrant/bin/linux-install-1.10.1.462.sh
+	wget -q https://download.clojure.org/install/linux-install-1.11.1.1224.sh
+	chmod a+x /home/vagrant/bin/linux-install-1.11.1.1224.sh
+	chown -R vagrant:vagrant /home/vagrant/bin-1.11.1.1224.sh
+	sudo /home/vagrant/bin/linux-install-1.11.1.1224.sh
 fi
