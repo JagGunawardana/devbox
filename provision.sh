@@ -86,10 +86,9 @@ pip install virtualenvwrapper
 
 ###################### Node
 echo "Node ....."
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt-get -y install nodejs
-npm install -g shadow-cljs
-sudo sudo npm install -g karma-cli
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
+    sudo apt-get install -y nodejs npm
+sudo npm install -g shadow-cljs karma-cli
 
 ###################### ZSH
 ###################### EMacs
