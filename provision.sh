@@ -214,6 +214,8 @@ if [ ! -f /home/vagrant/bin/lein ]; then
 	chmod a+x /home/vagrant/bin/lein
 	chown -R vagrant:vagrant /home/vagrant/bin
 	su -c "/home/vagrant/bin/lein" vagrant
+	# Install clojure-lsp
+	sudo bash < <(curl -s https://raw.githubusercontent.com/clojure-lsp/clojure-lsp/master/install)
 fi
 
 if [ ! -f /home/vagrant/bin/linux-install-1.11.1.1224.sh ]; then
