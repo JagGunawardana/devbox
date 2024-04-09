@@ -228,5 +228,6 @@ fi
 
 if [ ! -f /home/vagrant/bin/bbin ]; then
 	curl -o- -L https://raw.githubusercontent.com/babashka/bbin/v0.2.1/bbin > /home/vagrant/bin/bbin && chmod +x /home/vagrant/bin/bbin
+	curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install && chmod +x install && ./install --dir /home/vagrant/bin
 fi
 
