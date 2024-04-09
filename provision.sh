@@ -225,3 +225,8 @@ if [ ! -f /home/vagrant/bin/linux-install-1.11.1.1224.sh ]; then
 	chown -R vagrant:vagrant /home/vagrant/bin-1.11.1.1224.sh
 	sudo /home/vagrant/bin/linux-install-1.11.1.1224.sh
 fi
+
+if [ ! -f /home/vagrant/bin/bbin ]; then
+	curl -o- -L https://raw.githubusercontent.com/babashka/bbin/v0.2.1/bbin > /home/vagrant/bin/bbin && chmod +x /home/vagrant/bin/bbin
+fi
+
