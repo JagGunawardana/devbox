@@ -4,17 +4,18 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-    config.vm.box = "ubuntu/jammy64"
-    config.disksize.size = "50GB"
-    config.vm.provider :virtualbox do |vb|
-        vb.customize ["modifyvm", :id, "--memory", "16384", "--cpus", "4"]
+    config.vm.provider "vmware_desktop" do |vmware|
+      vmware.gui = false
+      vmware.allowlist_verified = true
+      vmware.utility_certificate_path = "/opt/vagrant-vmware-desktop/certificates"
+      vmware.vmx["memsize"] = "16384"
+      vmware.vmx["numvcpus"] = "4"
     end
-    config.vbguest.auto_update = true
+    config.vm.box = "bento/ubuntu-20.04-arm64"
     config.vm.hostname = 'plato'
     config.vm.synced_folder "~/", "/home/vagrant/host_home"
     config.vm.network "private_network", ip: '10.2.0.12'
     config.ssh.forward_agent = true
-
     config.vm.provision "file",
     	source: "~/.ssh", 
 	destination: "$HOME/.hostssh"
@@ -22,10 +23,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "file",
         source: "~/.aws",
 	destination: "$HOME/.aws"
-
-    config.vm.provision "file",
-    	source: "~/.gcp", 
-	destination: "$HOME/.gcp"
 
     config.vm.provision "file",
     	source: "./bin", 
@@ -40,7 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	destination: "$HOME"
 
     config.vm.provision "docker",
-    	images: ["consul"]
+    	images: ["alpine"]
 
     config.vm.provision "shell",
         privileged: true,
@@ -49,5 +46,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "shell",
     	privileged: true,
 	path: "provision.sh"
-
 end
