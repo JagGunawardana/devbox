@@ -2,9 +2,8 @@
 
 sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean && sudo apt-get autoremove
 sudo apt-get -y install tmux zip zsh
-
 sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim rlwrap
-sudo apt-get -y install ruby ruby-dev apt-transport-https build-essential ca-certificates default-jdk fonts-cmu fonts-dejavu
+sudo apt-get -y install apt-transport-https build-essential ca-certificates default-jdk fonts-cmu fonts-dejavu
 sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-10 libpq-dev postgis
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev ntp jq
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
@@ -14,12 +13,7 @@ sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
 sudo apt-get -y install awscli
-sudo snap install --classic heroku
-
-# Chrome headless
-sudo apt-get install -y libappindicator1 fonts-liberation
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome*.deb
+sudo snap install --classic emacs
 
 sudo locale-gen en_GB.UTF-8
 
@@ -41,7 +35,6 @@ chown -R vagrant:vagrant /home/vagrant/.ssh
 
 echo "Setting cloud dir owners....."
 chown -R vagrant:vagrant /home/vagrant/.aws
-chown -R vagrant:vagrant /home/vagrant/.gcp
 
 echo "Setting dirs ....."
 mkdir -p /home/vagrant/tmp && chown -R vagrant:vagrant /home/vagrant/tmp
@@ -84,40 +77,33 @@ chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 pip install virtualenv
 pip install virtualenvwrapper
 
+###################### Java
+sudo apt install -y wget apt-transport-https gpg
+wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null
+echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
+apt update 
+apt install temurin-21-jdk
+
 ###################### Node
-echo "Node ....."
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
-    sudo apt-get install -y nodejs npm
+sudo apt install nodejs
 sudo npm install -g shadow-cljs karma-cli
 
-###################### ZSH
 ###################### EMacs
 echo "EMACS ..."
 test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/ohai-emacs /home/vagrant/.emacs.d
 cp -r /home/vagrant/.emacs/* /home/vagrant/.emacs.d
 rm -rf .emacs
+chown -R vagrant:vagrant /home/vagrant/.emacs.d
 if  [ ! -f /home/vagrant/.emacs.d/snippets/flagfile ]; then
 	rm -rf /home/vagrant/tmp/snippets
 	git clone https://github.com/JagGunawardana/yasnippet-snippets.git /home/vagrant/tmp/snippets
 	cp -r /home/vagrant/tmp/snippets/snippets /home/vagrant/.emacs.d
 	rm -rf /home/vagrant/tmp/snippets
-	add-apt-repository ppa:ubuntu-elisp/ppa
-	apt-get update
-	sudo apt-get -y install emacs-snapshot emacs-snapshot-el
-	chown -R vagrant:vagrant /home/vagrant/.emacs.d
 fi
+
 if [ ! -d /home/vagrant/.emacs.d/downloads ]; then
 	su -c "mkdir /home/vagrant/.emacs.d/downloads" vagrant
 	su -c "wget -O /home/vagrant/.emacs.d/downloads/dired+.el https://www.emacswiki.org/emacs/download/dired%2b.el" vagrant
-fi
-
-###################### VIM
-echo "VIM ...."
-if  [ ! -d /home/vagrant/.vim/bundle ]; then
-	mkdir -p /home/vagrant/.vim/bundle
-	git clone https://github.com/VundleVim/Vundle.vim.git /home/vagrant/.vim/bundle/vundle
-	chown -R vagrant:vagrant /home/vagrant/.vim
-	su -c "echo | echo | vim +PluginInstall +GoInstallBinaries +qall > /dev/null" vagrant
 fi
 
 ## Helper to download binaries and check the hash
@@ -160,28 +146,10 @@ load_bin() {
     rm -f SUM $filename
 }
 
-# Nomad
-
-load_bin "https://releases.hashicorp.com/nomad/0.8.5/nomad_0.8.5_linux_amd64.zip" "e56c0e95e7a724b4fadd8eba32da5a3f2846f67e22e2352b19d1ada2066e063b" nomad /home/vagrant/bin
-
 # Terraform
-load_bin "https://releases.hashicorp.com/terraform/1.5.1/terraform_1.5.1_linux_amd64.zip" "31754361a9b16564454104bfae8dd40fc6b0c754401c51c58a1023b5e193aa29" terraform /home/vagrant/bin
-
-# Packer
-
-load_bin "https://releases.hashicorp.com/packer/1.2.5/packer_1.2.5_linux_amd64.zip" "bc58aa3f3db380b76776e35f69662b49f3cf15cf80420fc81a15ce971430824c" packer /home/vagrant/bin
-
-# docker-compose
-
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-
-# Google cloud SDK
-
-#load_bin "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-255.0.0-linux-x86_64.tar.gz" 18fcbc81b3b095ff5ef92fd41286a045f782c18d99a976c0621140a8fde3fbad google-cloud-sdk /home/vagrant/bin
-#test -L /home/vagrant/bin/gcloud || chmod +x /home/vagrant/bin/google-cloud-sdk/install.sh && su -c "/home/vagrant/bin/google-cloud-sdk/install.sh" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gcloud /home/vagrant/bin/gcloud" vagrant
-#test -L /home/vagrant/bin/kubectl || su -c "/home/vagrant/bin/gcloud components install kubectl" vagrant && su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/kubectl /home/vagrant/bin/kubectl" vagrant
-#test -L /home/vagrant/bin/gsutil || su -c "ln -s /home/vagrant/bin/google-cloud-sdk/bin/gsutil /home/vagrant/bin/gsutil" vagrant
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform
 
 ###################### Golang
 if [ ! -d /home/vagrant/work/go ]; then
@@ -218,13 +186,9 @@ if [ ! -f /home/vagrant/bin/lein ]; then
 	sudo bash < <(curl -s https://raw.githubusercontent.com/clojure-lsp/clojure-lsp/master/install)
 fi
 
-if [ ! -f /home/vagrant/bin/linux-install-1.11.1.1224.sh ]; then
-        cd /home/vagrant/bin
-	wget -q https://download.clojure.org/install/linux-install-1.11.1.1224.sh
-	chmod a+x /home/vagrant/bin/linux-install-1.11.1.1224.sh
-	chown -R vagrant:vagrant /home/vagrant/bin-1.11.1.1224.sh
-	sudo /home/vagrant/bin/linux-install-1.11.1.1224.sh
-fi
+curl -L -O https://github.com/clojure/brew-install/releases/latest/download/linux-install.sh
+chmod +x linux-install.sh
+sudo ./linux-install.sh
 
 if [ ! -f /home/vagrant/bin/bbin ]; then
 	curl -o- -L https://raw.githubusercontent.com/babashka/bbin/v0.2.1/bbin > /home/vagrant/bin/bbin && chmod +x /home/vagrant/bin/bbin

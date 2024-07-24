@@ -11,7 +11,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vmware.vmx["memsize"] = "16384"
       vmware.vmx["numvcpus"] = "4"
     end
-    config.vm.box = "bento/ubuntu-20.04-arm64"
+    config.vm.box = "bento/ubuntu-24.04"
+    config.vm.box_version = "202404.26.0"
     config.vm.hostname = 'plato'
     config.vm.synced_folder "~/", "/home/vagrant/host_home"
     config.vm.network "private_network", ip: '10.2.0.12'
