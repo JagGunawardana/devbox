@@ -4,7 +4,7 @@ sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean
 sudo apt-get -y install tmux zip zsh
 sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim rlwrap
 sudo apt-get -y install apt-transport-https build-essential ca-certificates default-jdk fonts-cmu fonts-dejavu
-sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-10 libpq-dev postgis
+sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-10 libpq-dev postgis postgresql-client
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev ntp jq
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev-is-python3 python3-pip
@@ -85,7 +85,7 @@ apt update
 apt install temurin-21-jdk
 
 ###################### Node
-sudo apt install nodejs
+sudo apt install nodejs npm
 sudo npm install -g shadow-cljs karma-cli
 
 ###################### EMacs
@@ -194,4 +194,9 @@ if [ ! -f /home/vagrant/bin/bbin ]; then
 	curl -o- -L https://raw.githubusercontent.com/babashka/bbin/v0.2.1/bbin > /home/vagrant/bin/bbin && chmod +x /home/vagrant/bin/bbin
 	curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install && chmod +x install && ./install --dir /home/vagrant/bin
 fi
+
+####################### AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
 
