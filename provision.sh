@@ -77,6 +77,13 @@ chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
 pip install virtualenv
 pip install virtualenvwrapper
 
+###################### HTTPie
+
+curl -SsL https://packages.httpie.io/deb/KEY.gpg | sudo gpg --dearmor -o /usr/share/keyrings/httpie.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/httpie.gpg] https://packages.httpie.io/deb ./" | sudo tee /etc/apt/sources.list.d/httpie.list > /dev/null
+sudo apt update
+sudo apt install httpie
+
 ###################### Java
 sudo apt install -y wget apt-transport-https gpg
 wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null
@@ -203,5 +210,6 @@ sudo ./aws/install
 
 ####################### Kubectl 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+chmod +x kubectrl
+sudo mv kubectrl /usr/local/bin
 
