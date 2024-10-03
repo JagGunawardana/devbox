@@ -14,7 +14,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "bento/ubuntu-24.04"
     config.vm.box_version = "202407.22.0"
     config.vm.hostname = 'plato'
-    config.vm.disk :disk, size: "128GB", primary: true
     config.vm.synced_folder "~/", "/home/vagrant/host_home"
     config.vm.network "private_network", ip: '10.2.0.12'
     config.ssh.forward_agent = true
