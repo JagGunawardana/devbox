@@ -48,9 +48,6 @@ ZSH_THEME="muse"
 plugins=(git docker postgres vi-mode python jsontools vagrant wd z terraform nomad golang lein emoji-clock chucknorris copyfile kubectl)
 source <(kubectl completion zsh)
 
-# Gcloud
-source ~/bin/google-cloud-sdk/completion.zsh.inc
-
 # User configuration
 
 export GOPATH=~/work/go
@@ -174,9 +171,6 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
 
 sshagent > /dev/null
-
-source ~/bin/google-cloud-sdk/completion.zsh.inc
-source ~/bin/google-cloud-sdk/path.zsh.inc
 
 # Start tmux if not already running
 if command -v tmux>/dev/null; then
