@@ -202,6 +202,8 @@ if [ ! -f /home/vagrant/bin/bbin ]; then
 	curl -sLO https://raw.githubusercontent.com/babashka/babashka/master/install && chmod +x install && ./install --dir /home/vagrant/bin
 fi
 
+clojure -Ttools install-latest :lib com.github.seancorfield/clj-new :as clj-new
+
 ####################### AWS CLI
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
