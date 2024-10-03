@@ -212,6 +212,6 @@ sudo ./aws/install
 
 ####################### Kubectl 
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"
-chmod +x kubectrl
-sudo mv kubectrl /usr/local/bin
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin
 
