@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+##### resize the disk first
+
+sudo growpart /dev/sda 3
+sudo lvextend -l+100%FREE /dev/ubuntu-vg/ubuntu-lv
+sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+
+###### Install packages
+
 sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean && sudo apt-get autoremove
 sudo apt-get -y install tmux zip zsh
 sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim rlwrap

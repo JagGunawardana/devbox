@@ -10,13 +10,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vmware.utility_certificate_path = "/opt/vagrant-vmware-desktop/certificates"
       vmware.vmx["memsize"] = "16384"
       vmware.vmx["numvcpus"] = "4"
+      vmware.linked_clone = false
     end
-    config.vm.box = "bento/ubuntu-24.04"
-    config.vm.box_version = "202407.22.0"
+    config.vm.box = "gutehall/ubuntu24-04"
+    config.vm.box_version = "2024.08.30"
     config.vm.hostname = 'plato'
     config.vm.synced_folder "~/", "/home/vagrant/host_home"
     config.vm.network "private_network", ip: '10.2.0.12'
     config.ssh.forward_agent = true
+    config.vm.disk :disk, name: "disk", size: "128GB", primary: true
     config.vm.provision "file",
     	source: "~/.ssh", 
 	destination: "$HOME/.hostssh"
