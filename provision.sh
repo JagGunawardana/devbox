@@ -2,9 +2,9 @@
 
 ##### resize the disk first
 
-sudo growpart /dev/sda 3
-sudo lvextend -l+100%FREE /dev/ubuntu-vg/ubuntu-lv
-sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+#sudo growpart /dev/sda 3
+#sudo lvextend -l+100%FREE /dev/ubuntu-vg/ubuntu-lv
+#sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 
 ###### Install packages
 
