@@ -16,14 +16,15 @@ sudo apt-get -y install libmysqlclient-dev mysql-client mysql-server postgresql-
 sudo apt-get -y install build-essential cmake g++ libffi-dev libssl-dev libxml2-dev libxslt-dev libyaml-dev ntp jq
 sudo apt-get -y install openssl pkg-config zlibc zlib1g-dev
 sudo apt-get -y install python-dev-is-python3 python3-pip
+sudo apt-get -y install python3.12-venv
 sudo apt-get -y install phantomjs httpie
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
 sudo apt-get -y install awscli
 sudo snap install --classic emacs
-
 sudo locale-gen en_GB.UTF-8
+
 
 ###################### Sort out file permissions
 
@@ -100,7 +101,7 @@ apt update
 apt install temurin-21-jdk
 
 ###################### Node
-sudo apt install nodejs npm
+sudo apt-get -y  install nodejs npm
 sudo npm install -g shadow-cljs karma-cli
 
 ###################### EMacs
@@ -109,6 +110,8 @@ test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/oh
 cp -r /home/vagrant/.emacs/* /home/vagrant/.emacs.d
 rm -rf .emacs
 chown -R vagrant:vagrant /home/vagrant/.emacs.d
+/home/vagrant/.emacs.d/venv/bin/python3 -m pip install semgrep
+ln -s /home/vagrant/.emacs.d/venv/bin/semgrep /home/vagrant/bin/semgrep
 if  [ ! -f /home/vagrant/.emacs.d/snippets/flagfile ]; then
 	rm -rf /home/vagrant/tmp/snippets
 	git clone https://github.com/JagGunawardana/yasnippet-snippets.git /home/vagrant/tmp/snippets
