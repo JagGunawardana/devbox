@@ -110,6 +110,7 @@ test -d /home/vagrant/.emacs.d || git clone https://github.com/JagGunawardana/oh
 cp -r /home/vagrant/.emacs/* /home/vagrant/.emacs.d
 rm -rf .emacs
 chown -R vagrant:vagrant /home/vagrant/.emacs.d
+python -m venv /home/vagrant/.emacs.d/venv
 /home/vagrant/.emacs.d/venv/bin/python3 -m pip install semgrep
 ln -s /home/vagrant/.emacs.d/venv/bin/semgrep /home/vagrant/bin/semgrep
 if  [ ! -f /home/vagrant/.emacs.d/snippets/flagfile ]; then
