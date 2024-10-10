@@ -23,6 +23,7 @@ sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
 sudo apt-get -y install awscli
 sudo snap install --classic emacs
+sudo snap install httpie
 sudo locale-gen en_GB.UTF-8
 
 
