@@ -108,6 +108,9 @@ alias ssh_unsafe='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=n
 export WORKON_HOME=~/.virtualenvs
 export PATH=$PATH:~/.local/bin
 
+# fly.io
+export FLYCTL_INSTALL=~/.fly
+
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
