@@ -228,3 +228,7 @@ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stabl
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin
 
+
+####################### fly.io
+curl -L https://fly.io/install.sh | sh
+ln -s /home/vagrant/.fly/bin/fly /home/vagrant/bin/fly
