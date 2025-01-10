@@ -5,8 +5,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provider "vmware_desktop" do |vmware|
-      vmware.gui = false
-      vmware.allowlist_verified = true
+      vmware.gui = true
+      vmware.allowlist_verified = false
       vmware.utility_certificate_path = "/opt/vagrant-vmware-desktop/certificates"
       vmware.vmx["memsize"] = "16384"
       vmware.vmx["numvcpus"] = "4"
@@ -21,6 +21,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "file",
     	source: "~/.ssh", 
 	destination: "$HOME/.hostssh"
+
+    config.vm.provision "file",
+    	source: "~/bin", 
+	destination: "$HOME/bin"
 
     config.vm.provision "file",
         source: "~/.aws",

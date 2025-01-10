@@ -39,6 +39,11 @@ echo "Setting SSH permissions....."
 chmod 600 /home/vagrant/.ssh/*
 chmod 700 /home/vagrant/.ssh
 
+test -d /home/vagrant/bin || mkdir /home/vagrant/bin
+chmod 600 /home/vagrant/bin/*
+chmod 700 /home/vagrant/bin
+chmod +x /home/vagrant/bin/*
+
 echo ".. key perms"
 
 chown -R vagrant:vagrant /home/vagrant/.ssh
@@ -81,6 +86,7 @@ fi
 echo "ZSH ..."
 test -d /home/vagrant/.oh-my-zsh || git clone https://github.com/robbyrussell/oh-my-zsh.git /home/vagrant/.oh-my-zsh
 chown -R vagrant:vagrant /home/vagrant/.oh-my-zsh
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 ###################### Python
 
@@ -170,29 +176,6 @@ load_bin() {
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform
-
-###################### Golang
-if [ ! -d /home/vagrant/work/go ]; then
-	cd /home/vagrant/tmp
-	wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
-	echo "b3fcf280ff86558e0559e185b601c9eade0fd24c900b4c63cd14d1d38613e499  go1.11.linux-amd64.tar.gz" > /home/vagrant/tmp/SUM
-	cat /home/vagrant/tmp/go1.11.linux-amd64.tar.gz | sha256sum -c /home/vagrant/tmp/SUM
-	if [ $? -eq 0 ]; then
-		tar -C /usr/local -xzf /home/vagrant/tmp/go1.11.linux-amd64.tar.gz
-		ln -fs /usr/local/go/bin/go /usr/bin
-	fi
-	mkdir -p /home/vagrant/work/go/src
-	chown -R vagrant:vagrant /home/vagrant/work
-	rm /home/vagrant/tmp/SUM /home/vagrant/tmp/go1.11.linux-amd64.tar.gz
-	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/mdempsky/gocode" vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u golang.org/x/tools/cmd/guru" vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u golang.org/x/tools/cmd/goimports" vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u google.golang.org/grpc" vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/golang/protobuf/..." vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/rogpeppe/godef" vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/smartystreets/goconvey" vagrant
-	su -c "GOPATH=/home/vagrant/work/go go get -u github.com/mna/pigeon" vagrant
-fi
 
 ###################### Clojure
 
