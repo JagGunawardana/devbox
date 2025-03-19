@@ -108,7 +108,8 @@ apt update
 apt install temurin-21-jdk
 
 ###################### Node
-sudo apt-get -y  install nodejs npm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+sudo nvm install 18.20.0
 sudo npm install -g shadow-cljs karma-cli
 
 ###################### EMacs
