@@ -8,6 +8,9 @@
 
 ###### Install packages
 
+# Node repo
+
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo bash - apt
 sudo apt-get update && sudo apt-get dist-upgrade --yes && sudo apt-get autoclean && sudo apt-get autoremove
 sudo apt-get -y install tmux zip zsh
 sudo apt-get -y install irssi pandoc texlive-fonts-recommended vim rlwrap
@@ -21,7 +24,7 @@ sudo apt-get -y install phantomjs httpie
 sudo apt-get -y install fortunes figlet
 sudo apt-get -y install redis-server mongodb
 sudo apt-get -y install fonts-powerline
-sudo apt-get -y install awscli
+sudo apt-get -y install awscli nodejs
 sudo snap install --classic emacs
 sudo snap install httpie
 sudo locale-gen en_GB.UTF-8
