@@ -1,11 +1,5 @@
 #!/bin/zsh
 
-##### resize the disk first
-
-#sudo growpart /dev/sda 3
-#sudo lvextend -l+100%FREE /dev/ubuntu-vg/ubuntu-lv
-#sudo resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
-
 ###### Install packages
 
 # Node repo
@@ -95,6 +89,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 
 pip install virtualenv
 pip install virtualenvwrapper
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ###################### HTTPie
 
@@ -183,7 +178,8 @@ load_bin() {
     rm -f SUM $filename
 }
 
-# Terraform
+###################### Terraform
+
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform
